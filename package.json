@@ -1,0 +1,25 @@
+{
+  "name": "api_template",
+  "description": "template for building api's with openApi, expressjs and swagger tools",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "openapi-editor": "^0.3.0",
+    "swagger-ui-express": "^4.3.0"
+  },
+  "scripts": {
+    "api:edit": "openapi-editor --file ./conf/api_spec.yaml --port 8888"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nathanlewan/api_template.git"
+  },
+  "author": "Nathan Lewan",
+  "license": "GPLv3",
+  "bugs": {
+    "url": "https://github.com/nathanlewan/api_template/issues"
+  },
+  "homepage": "https://github.com/nathanlewan/api_template#readme"
+}
