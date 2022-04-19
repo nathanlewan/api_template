@@ -1,3 +1,4 @@
+const { config } = require('dotenv');
 const path = require('path');
 
 if (process.env.RUN_STANDALONE ) {
@@ -20,5 +21,11 @@ module.exports = (basePath) => {
 
     let servers = initializeWebServer( cfg )
     initializeRoutes( cfg, servers)
+
+    return {
+        "expressApp": servers.expressApp,
+        "socketioApp": servers.socketioApp,
+        "baseConfig": cfg
+    }
 
 }

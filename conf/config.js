@@ -11,7 +11,8 @@ module.exports = (basePath) => {
             socketIoStatus: (process.env.api_NODE_SOCKET_IO || 'enabled').toLowerCase(),
             HTTP_HTTPS: (process.env.api_NODE_HTTP_HTTPS || 'http').toLowerCase(),
             HTTPS_CERT_PATH: process.env.api_NODE_HTTPS_CERT_PATH || '',
-            HTTPS_KEY_PATH: process.env.api_NODE_HTTPS_CERT_KEY_PATH || ''
+            HTTPS_KEY_PATH: process.env.api_NODE_HTTPS_CERT_KEY_PATH || '',
+            examplesRouteStatus: (process.env.api_NODE_ENABLE_EXAMPLES || 'enabled').toLowerCase()
         }
     }
 };
