@@ -11,7 +11,7 @@
     "swagger-ui-express": "^4.3.0"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "RUN_STANDALONE='yes' node index.js"
   },
   "repository": {
     "type": "git",
