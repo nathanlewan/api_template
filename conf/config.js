@@ -5,7 +5,7 @@ module.exports = (basePath) => {
 
     require('dotenv').config({ path: path.join( basePath, 'conf','.env') });
 
-    logger.info("[base]: creating config object")
+    logger.info("[base][config]: creating config object");
 
     return {
         nodeServer: {
@@ -18,5 +18,5 @@ module.exports = (basePath) => {
             examplesRouteStatus: (process.env.api_NODE_ENABLE_EXAMPLES || 'enabled').toLowerCase(),
             testingRouteStatus: (process.env.api_NODE_ENABLE_TESTING || 'enabled').toLowerCase()
         }
-    }
+    };
 };
