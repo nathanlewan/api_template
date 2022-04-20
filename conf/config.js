@@ -1,8 +1,11 @@
 const path = require('path');
+const logger = require ('../../base/lib/service/loggerService');
 
 module.exports = (basePath) => {
 
     require('dotenv').config({ path: path.join( basePath, 'conf','.env') });
+
+    logger.info("[base]: creating config object")
 
     return {
         nodeServer: {
