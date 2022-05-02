@@ -3,16 +3,15 @@ const path = require('path');
 
 if (process.env.RUN_STANDALONE ) {
 
-    const configs = {
-        "baseConfigs": require( path.join(__dirname, 'conf','config') )("")
-    }
+        const configs = {
+            "baseConfigs": require( path.join(__dirname, 'conf','config') )("")
+        }
 
-    const cfg = require( path.join(__dirname, 'conf','config') )(basePath);
-    const initializeWebServer = require( path.join(__dirname, 'lib', 'init', 'build_node_webserver') );
-    const initializeRoutes = require( path.join(__dirname, 'lib', 'init', 'build_node_routers') )
+        const initializeWebServer = require( path.join(__dirname, 'lib', 'init', 'build_node_webserver') );
+        const initializeRoutes = require( path.join(__dirname, 'lib', 'init', 'build_node_routers') )
 
-    let servers = initializeWebServer( configs.baseConfigs )
-    initializeRoutes( configs.baseConfigs, servers)
+        let servers = initializeWebServer( configs )
+        initializeRoutes( servers)
     
 }
 
