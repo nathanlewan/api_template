@@ -16,6 +16,17 @@ module.exports = (basePath) => {
             HTTPS_CERT_PATH: process.env.api_NODE_HTTPS_CERT_PATH || '',
             HTTPS_KEY_PATH: process.env.api_NODE_HTTPS_CERT_KEY_PATH || '',
             examplesRouteStatus: (process.env.api_NODE_ENABLE_EXAMPLES || 'enabled').toLowerCase()
+        },
+        routes: {
+            examples: {
+                examplesRouteStatus: (process.env.api_NODE_ENABLE_EXAMPLES || 'enabled').toLowerCase()
+            }
+        },
+        auth: {
+            token: {
+                tokenAuthEnabled: (process.env.api_NODE_TOKEN_AUTH_ENABLED || 'enabled').toLowerCase(),
+                tokenAuthToken: process.env.api_TOKEN || '12345678'
+            }
         }
     };
 };
