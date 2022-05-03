@@ -1,25 +1,17 @@
 const path = require('path');
 
-
-if (process.env.RUN_STANDALONE ) {
-
-        const configs = {
-            "baseConfigs": require( path.join(__dirname, 'conf','config') )("")
-        }
-
-        const initializeWebServer = require( path.join(__dirname, 'lib', 'init', 'build_node_webserver') );
-        const initializeRoutes = require( path.join(__dirname, 'lib', 'init', 'build_node_routers') )
-
-        let servers = initializeWebServer( configs )
-        initializeRoutes( servers)
-    
+const utilityFunctions = {
+    "filesystemFunctions": require('./lib/utility_functions/filesystem_functions')
 }
 
-module.exports = (basePath) => {
+
+let startServices = (basePath) => {
 
     const configs = {
         "baseConfigs": require( path.join(__dirname, 'conf','config') )(basePath)
     }
+
+    utilityFunctions.filesystemFunctions.createBaseFolderStructures();
 
     const initializeWebServer = require( path.join(__dirname, 'lib', 'init', 'build_node_webserver') );
     const initializeRoutes = require( path.join(__dirname, 'lib', 'init', 'build_node_routers') )
@@ -27,12 +19,26 @@ module.exports = (basePath) => {
     let servers = initializeWebServer( configs )
     initializeRoutes( servers )
 
-    return {
-        "expressApp": servers.expressApp,
-        "socketioApp": servers.socketioApp,
-        "configs": {
-            "baseConfigs": configs.baseConfigs
+    if ( basePath === "" ) {
+        return {
+            "expressApp": servers.expressApp,
+            "socketioApp": servers.socketioApp,
+            "configs": {
+                "baseConfigs": configs.baseConfigs
+            }
         }
     }
+
+}
+
+if (process.env.RUN_STANDALONE ) {
+
+    startServices("")
+    
+}
+
+module.exports = (basePath) => {
+
+    startServices(basePath)
 
 }
