@@ -1,5 +1,5 @@
 const path = require('path');
-const logger = require ('../../base/lib/service/loggerService');
+const logger = require ('../lib/service/loggerService');
 
 module.exports = (basePath) => {
 
