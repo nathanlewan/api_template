@@ -19,7 +19,7 @@ let startServices = (basePath) => {
     let servers = initializeWebServer( configs )
     initializeRoutes( servers )
 
-    if ( basePath === "" ) {
+    if ( basePath !== "" ) {
         return {
             "expressApp": servers.expressApp,
             "socketioApp": servers.socketioApp,
