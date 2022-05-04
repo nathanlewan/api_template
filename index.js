@@ -6,7 +6,7 @@ const utilityFunctions = {
 }
 
 
-let startServices = async (basePath) => {
+let startServices = (basePath) => {
 
     logger.info(`[base][index]: running startServices function with basepath of [${basePath}]`);
 
@@ -14,7 +14,7 @@ let startServices = async (basePath) => {
         "baseConfigs": require( path.join(__dirname, 'conf','config') )(basePath)
     }
 
-    await utilityFunctions.filesystemFunctions.createBaseFolderStructures();
+    utilityFunctions.filesystemFunctions.createBaseFolderStructures();
 
     const initializeWebServer = require( path.join(__dirname, 'lib', 'init', 'build_node_webserver') );
     const initializeRoutes = require( path.join(__dirname, 'lib', 'init', 'build_node_routers') )
