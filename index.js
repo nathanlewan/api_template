@@ -39,6 +39,6 @@ if (process.env.RUN_STANDALONE ) {
 
 module.exports = (basePath) => {
 
-    startServices(basePath)
+    return startServices(basePath)
 
 }
