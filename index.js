@@ -1,31 +1,47 @@
-const { config } = require('dotenv');
 const path = require('path');
+const logger = require ( path.join(__dirname, 'lib', 'service', 'loggerService') );
 
-if (process.env.RUN_STANDALONE ) {
+const utilityFunctions = {
+    "filesystemFunctions": require( path.join(__dirname, 'lib', 'utility_functions', 'filesystem_functions') )
+}
 
-    let basePath = "";
-    const cfg = require( path.join(__dirname, 'conf','config') )(basePath);
+
+let startServices = (basePath) => {
+
+    logger.info(`[base][index]: running startServices function with basepath of [${basePath}]`);
+
+    const configs = {
+        "baseConfigs": require( path.join(__dirname, 'conf','config') )(basePath)
+    }
+
+    utilityFunctions.filesystemFunctions.createBaseFolderStructures();
+
     const initializeWebServer = require( path.join(__dirname, 'lib', 'init', 'build_node_webserver') );
     const initializeRoutes = require( path.join(__dirname, 'lib', 'init', 'build_node_routers') )
 
-    let servers = initializeWebServer( cfg )
-    initializeRoutes( cfg, servers)
+    let servers = initializeWebServer( configs )
+    initializeRoutes( servers )
+
+    if ( basePath !== "" ) {
+        return {
+            "expressApp": servers.expressApp,
+            "socketioApp": servers.socketioApp,
+            "configs": {
+                "baseConfigs": configs.baseConfigs
+            }
+        }
+    }
+
+}
+
+if (process.env.RUN_STANDALONE ) {
+
+    startServices("")
     
 }
 
 module.exports = (basePath) => {
 
-    const cfg = require( path.join(__dirname, 'conf','config') )(basePath);
-    const initializeWebServer = require( path.join(__dirname, 'lib', 'init', 'build_node_webserver') );
-    const initializeRoutes = require( path.join(__dirname, 'lib', 'init', 'build_node_routers') )
-
-    let servers = initializeWebServer( cfg )
-    initializeRoutes( cfg, servers)
-
-    return {
-        "expressApp": servers.expressApp,
-        "socketioApp": servers.socketioApp,
-        "baseConfig": cfg
-    }
+    return startServices(basePath)
 
 }
