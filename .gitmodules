@@ -1,4 +1,0 @@
-[submodule "env"]
-	path = env
-	url = https://github.com/nathanlewan/environment_builder.git
-	branch = master
